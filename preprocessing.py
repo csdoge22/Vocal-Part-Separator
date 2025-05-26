@@ -49,3 +49,5 @@ def trim_and_resample_all_audio_files():
         # Save combined mixture
         mixture_path = os.path.join(output_song_dir, "mixture.wav")
         combined_audio.export(mixture_path, format="wav")
+
+trim_and_resample_all_audio_files()
