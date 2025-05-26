@@ -31,7 +31,8 @@ def trim_and_resample_all_audio_files():
                 continue
 
             audio = AudioSegment.from_file(input_file)
-            trimmed = audio[:target_duration_ms]
+            mono_audio = audio.set_channels(1)
+            trimmed = mono_audio[:target_duration_ms]
 
             if len(trimmed) < target_duration_ms:
                 padding = target_duration_ms - len(trimmed)
@@ -47,7 +48,8 @@ def trim_and_resample_all_audio_files():
             combined_audio = combined_audio.overlay(resampled)
 
         # Save combined mixture
+        mono_combined_audio = combined_audio.set_channels(1)
         mixture_path = os.path.join(output_song_dir, "mixture.wav")
-        combined_audio.export(mixture_path, format="wav")
+        mono_combined_audio.export(mixture_path, format="wav")
 
 trim_and_resample_all_audio_files()
